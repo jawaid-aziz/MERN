@@ -1,14 +1,17 @@
 const http = require('http');
+const express = require("express");
 
-const server = http.createServer((req, res) => {
-    console.log("Request received");
-  if(req.url === '/next')
-  {
-    res.end("This is for the NEXT path");
-  }
-});
+const app = express();
 
-server.listen(8000, () => {
-  console.log('Server is listening on port 8000');
-});
+app.get("/", (req, res) => {
+    return res.send("Hello for home page")
+})
+
+app.get("/about", (req, res) => {
+    return res.send("Hello for about page")
+})
+
+app.listen(8000, () => {
+    console.log("Server is listening");
+})
 
