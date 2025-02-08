@@ -25,7 +25,9 @@ app.route("/users/:id")
     res.json(user);
 })
 .patch((req, res) => {
-
+    const id = req.params.id;
+    const index = users.findIndex(user => user.id == id);
+    users[index] = {...users[index], ...req.body};
 })
 .delete((req, res) => {
     const id = req.params.id;
