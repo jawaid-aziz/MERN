@@ -1,8 +1,39 @@
 const express = require("express");
 const fs = require("fs");
 const users = require("./MOCK_DATA.json");
+const mongoose = require("mongoose");
+
 const app = express();
 const port  = 8000;
+
+mongoose
+    .connect("mongodb://localhost:27017/practice-database")
+    .then(() => {
+        console.log("Connected to database");
+    })
+    .catch(err => {
+        console.log(err);
+    })
+const userSchema = new mongoose.Schema({
+    first_name:{
+        type: String,
+        required: true
+    },
+    last_name:{
+        type: String,
+    },
+    email:{
+        type: String,
+        required: true,
+        unique: true
+    },
+    gender:{
+        type: String,
+        required: true
+    },
+})
+
+const User = mongoose.model("user", userSchema);
 
 app.use(express.urlencoded({extended: true}));
 
